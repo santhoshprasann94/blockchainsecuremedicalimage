@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{%block contents%}
+<style>
+  input,textarea,button { box-shadow: 0 0 3px #CC0000; margin: 10px }
+
+</style>
+<div class="wrapper">
+    <div class="col">
+        <h2>Blockchain-based Secure <span>Storage System for Medical Image Data</span></h2>
+        <p class="pad_bot1"><strong>The Diagnostics User Login Here</strong></p>
+
+        <form action="{%url 'UserLoginCheck'%}" method="POST" id="ContactForm" class="text-primary" style="width:100%">
+            {% csrf_token %}
+            <table>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" name="loginid" class="input" required
+                               placeholder="Enter Login Id">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input type="password" class="form-control" class="input" name="pswd" required
+                               placeholder="Enter password">
+                    </div>
+                </div>
+                <tr>
+                    <td style="padding:20px;">
+                        <button class="btn btn-block btn-primary text-white py-2 px-4" style="margin-left:20%;"
+                                type="submit">
+                            Login
+                        </button>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                {% if messages %}
+                {% for message in messages %}
+                <font color='GREEN'> {{ message }}</font>
+                {% endfor %}
+                {% endif %}
+
+            </table>
+
+        </form>
+    </div>
+    {%endblock%}

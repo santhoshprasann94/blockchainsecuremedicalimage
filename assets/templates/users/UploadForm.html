@@ -1,0 +1,180 @@
+{% extends 'users/userbase.html'%}
+
+{%load static%}
+
+{%block contents%}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<style>
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 1px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+
+</style>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 1px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+
+</style>
+<script>
+   $('body').on('change', "select[name='department']", function(){
+       $( "select[name='department'] option:selected" ).each(function() {
+        department = $( this ).val();
+        document.getElementById('dpts').value = department;
+        console.log(department)
+       });
+
+
+       $.ajax({
+        type: "GET",
+        url: '/get_doctors',
+        data: {'department': department},
+        dataType: 'json',
+        success: function(response) {
+        console.log(response)
+        var rspns = eval(response)
+         $("#departments").attr('disabled', true);
+        $.each(response,function(key, value)
+                {
+                    $("#source-selection").append('<option value=' + value.doctorName + '>' + value.doctorName + '</option>');
+                });
+
+
+        },
+        error: function() {
+            alert('No doctors found in the '+department);
+        }
+       });
+   });
+
+
+
+</script>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>
+<div class="wrapper">
+    <div class="col">
+        <h2>Blockchain-based Secure <span>Storage System for Medical Image Data</span></h2>
+        <p class="pad_bot1"><strong>Add new Clinician</strong></p>
+        <p>
+        <form action="{%url 'AddMedicalData'%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Patient Name</td>
+                    <td><input type="text" name="patientName" id="" pattern="[a-zA-Z]+" required></td>
+                </tr>
+                <tr>
+                    <td>Select Medical Department</td>
+                    <td><select name="department" id="departments" required>
+                        <option value="">--Select Medical Department--</option>
+                        <option value="Bachelor of Surgery">Bachelor of Surgery</option>
+                        <option value="Bachelor of Dental Surgery">Bachelor of Dental Surgery</option>
+                        <option value="Bachelor of Unani Medicine and Surgery">Bachelor of Unani Medicine and Surgery
+                        </option>
+                        <option value="Bachelor of Physiotherapy">Bachelor of Physiotherapy</option>
+                        <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
+                        <option value="MD">MD</option>
+                        <option value="Bachelor of Occupational Therapy">Bachelor of Occupational Therapy</option>
+                        <option value="Bachelor of Yoga and Naturopathy Sciences">Bachelor of Yoga and Naturopathy
+                            Sciences
+                        </option>
+                        <option value="MBBS">MBBS</option>
+                    </select></td>
+                </tr>
+
+                <tr>
+                    <td>Select Doctor</td>
+                    <td>
+                        <select id="source-selection" name="doctor">
+                            <option value="everything">--Select The Doctor--</option>
+                        </select>
+                    </td>
+                </tr>
+                <input type="hidden" id="dpts" name="dpts" value="" />
+                <tr>
+                    <td>Patient Address</td>
+                    <td><textarea name="address" id="" cols="30" rows="3"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Patient Email</td>
+                    <td><input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="patientEmail" id=""
+                               required></td>
+                </tr>
+                <tr>
+                    <td>Patient Mobile</td>
+                    <td><input type="text" pattern="[56789][0-9]{9}" name="mobile" id="" required></td>
+                </tr>
+                <tr>
+                    <td>Select Medical Report Image</td>
+                    <td>
+                        <input accept="image/gif, image/jpeg, image/png"
+                               name="file"
+                               placeholder="Select an Image to Upload"
+                               required
+                               type="file" onchange="loadFile(event)">
+
+                   </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit">Upload to Cloud</button>
+                    </td>
+                </tr>
+            </table>
+
+        <h2>
+            {{msg}}
+        </h2>
+        </form>
+        </p>
+    </div>
+
+</div>
+<img id="output" width="800" height="600"/>
+
+{%endblock%}

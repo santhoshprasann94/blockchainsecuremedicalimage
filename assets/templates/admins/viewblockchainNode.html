@@ -1,0 +1,104 @@
+{% extends 'admins/adminbase.html'%}
+{%load static%}
+
+{%block contents%}
+
+<style>
+.scrollit {
+    overflow:scroll;
+
+}
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: auto;
+
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 1px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+
+</style>
+
+<div class="wrapper">
+    <div class="col">
+        <h2>Blockchain-based Secure <span>Storage System for Medical Image Data</span></h2>
+        <p class="pad_bot1"><strong>Electronic Medical Record</strong></p>
+        <p>Since Article 69 of the
+            "Medical Law" was amended on January 29, 2013, has become popular in medical institutions in
+            Taiwan. Though it is costly, it allows the reduction of time, convenience of data analysis,
+            and so forth. The electronic medical record system is used for doctors to edit the
+            electronic medical record after diagnosing the patient and upload the relevant examination
+            results such as X-ray images. Medical records are exchanged in the host computer of the
+            hospital. If doctors access medical records, they must be through the host computer under a
+            certain authority.
+        </p>
+
+    </div>
+    <div class="body3">
+        <div class="main">
+            <section id="content2">
+                <div class="scrollit">
+                    <h2>View Blockchain Transaction Model</h2>
+                    <table style="width:100%">
+
+                        <tr>
+                        <tr>
+                            <td>S.NO</td>
+                            <td>Timestamp</td>
+                            <td>Current Sender</td>
+                            <td>Current Recipient</td>
+                            <td>CurrentProof</td>
+                            <td>Current Previous Hash</td>
+                            <td>Previous Timestamp</td>
+                            <td>Previous Sender</td>
+                            <td>Previous Recipient</td>
+                            <td>Previous Proof</td>
+                            <td>Previous Hash</td>
+                        </tr>
+                        </tr>
+
+                        {% for i in data %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.c_timestamp}}</td>
+                            <td>{{i.c_sender}}</td>
+                            <td>{{i.c_recipient}}</td>
+                            <td>{{i.c_proof}}</td>
+                            <td>{{i.c_previous_hash}}</td>
+                            <td>{{i.p_timestamp}}</td>
+                            <td>{{i.p_sender}}</td>
+                            <td>{{i.p_recipient}}</td>
+                            <td>{{i.p_proof}}</td>
+                            <td>{{i.p_previous_hash}}</td>
+
+
+                        </tr>
+                        {% endfor %}
+
+
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    {%endblock%}

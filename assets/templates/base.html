@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Secure Storage Medical Image</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{%static 'css/reset.css'%}" type="text/css" media="all">
+    <link rel="stylesheet" href="{%static 'css/layout.css'%}" type="text/css" media="all">
+    <link rel="stylesheet" href="{%static 'css/style.css'%}" type="text/css" media="all">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="{%static 'js/ie6_script_other.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/html5.js'%}"></script>
+    <![endif]-->
+</head>
+<body id="page1">
+<!-- START PAGE SOURCE -->
+<div class="body1">
+    <div class="body2">
+        <div class="main">
+            <header>
+                <div class="wrapper">
+                    <h3 style="Color:#1183B9;font-weight: bold"> Secure Storage Medical Image</h3>
+
+                </div>
+                <div class="wrapper">
+                    <nav>
+                        <ul id="menu">
+                            <li class=""><a href="{% url 'index' %}">Home</a></li>
+                            <li class=""><a href="{% url 'UserLogin' %}">User</a></li>
+                            <li class=""><a href="{% url 'AdminLogin' %}">Admin</a></li>
+                            <li class=""><a href="{% url 'DoctorLoginCheck' %}">Clinician</a></li>
+                            <li class=""><a href="{% url 'UserRegister' %}">Register</a></li>
+                        </ul>
+                    </nav>
+                </div>
+               {%block contents%}
+                {%endblock%}
+            </header>
+
+        </div>
+    </div>
+</div>
+<div class="body3">
+    <div class="main">
+
+        <footer>
+
+            <div class="pad">
+                <p class="lf">Copyright &copy; 2024 <a href="#">Alex Corp</a> - All Rights Reserved</p>
+                <p class="rf">Design by <a href="#">Alex Hales</a></p>
+                <div style="clear:both;"></div>
+            </div>
+        </footer>
+    </div>
+</div>
+<!-- END PAGE SOURCE -->
+</body>
+</html>
+

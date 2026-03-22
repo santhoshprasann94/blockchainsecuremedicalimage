@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{%block contents%}
+<style>
+input,textarea,button { box-shadow: 0 0 3px #CC0000; margin: 10px }
+
+
+
+</style>
+<div class="wrapper">
+    <div class="col">
+        <h2>Blockchain-based Secure <span>Storage System for Medical Image Data</span></h2>
+        <p class="pad_bot1"><strong>The Doctor Login Here</strong></p>
+
+        <form action="{%url 'DoctorLoginCheck'%}" method="POST" id="ContactForm" class="text-primary"
+              style="width:100%">
+            {% csrf_token %}
+            <table>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <td><input type="text" pattern="[56789][0-9]{9}" placeholder="Please Enter Mobile Number"
+                                   name="mobile" id="" required autocomplete="off"></td>
+                    </div>
+                </div>
+
+                <tr>
+                    <td style="padding:20px;">
+                        <button class="btn btn-block btn-primary text-white py-2 px-4" style="margin-left:20%;"
+                                type="submit">
+                            Login
+                        </button>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                {% if messages %}
+                {% for message in messages %}
+                <font color='GREEN'> {{ message }}</font>
+                {% endfor %}
+                {% endif %}
+
+            </table>
+
+        </form>
+    </div>
+    {%endblock%}

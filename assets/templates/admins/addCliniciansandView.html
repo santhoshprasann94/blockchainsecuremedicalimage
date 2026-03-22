@@ -1,0 +1,143 @@
+{% extends 'admins/adminbase.html'%}
+{%load static%}
+
+{%block contents%}
+<style>
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 1px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+</style>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 1px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+</style>
+
+<div class="wrapper">
+    <div class="col">
+        <h2>Blockchain-based Secure <span>Storage System for Medical Image Data</span></h2>
+        <p class="pad_bot1"><strong>Add new Clinician</strong></p>
+        <p>
+        <form action="{%url 'AddDoctorsandView'%}" method="post">
+         {% csrf_token %}
+        <table>
+            <tr>
+                <td>Doctor Name</td>
+                <td><input type="text" name="doctorName" id="" pattern="[a-zA-Z]+" required></td>
+            </tr>
+            <tr>
+                <td>Select Qualification</td>
+                <td><select name="doctorQualification" id="" required>
+                    <option value="">--Select Doctor Qualification--</option>
+                    <option value="Bachelor of Surgery">Bachelor of Surgery</option>
+                    <option value="Bachelor of Dental Surgery">Bachelor of Dental Surgery</option>
+                     <option value="Bachelor of Unani Medicine and Surgery">Bachelor of Unani Medicine and Surgery</option>
+                     <option value="Bachelor of Physiotherapy">Bachelor of Physiotherapy</option>
+                     <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
+                     <option value="MD">MD</option>
+                     <option value="Bachelor of Occupational Therapy">Bachelor of Occupational Therapy</option>
+                     <option value="Bachelor of Yoga and Naturopathy Sciences">Bachelor of Yoga and Naturopathy Sciences</option>
+                    <option value="MBBS">MBBS</option>
+                </select></td>
+            </tr>
+             <tr>
+                <td>Years of Experience</td>
+                <td><input type="number" name="experience" min="0" maxlength="45" required></td>
+            </tr>
+             <tr>
+                <td>Address </td>
+                <td><textarea name="address" id="" cols="30" rows="3"></textarea></td>
+            </tr>
+             <tr>
+                <td>Doctor Email</td>
+                <td><input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="doctorEmail" id="" required></td>
+            </tr>
+             <tr>
+                <td>Doctor Mobile</td>
+                <td><input type="text" pattern="[56789][0-9]{9}" name="mobile" id="" required></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">Register</button></td>
+            </tr>
+        </table>
+
+    </form>
+        </p>
+       </div>
+</div>
+<div class="body3">
+  <div class="main">
+    <section id="content2">
+        <h2>View All Doctors Info</h2>
+ <table border="1px">
+
+            <tr style="color:red;font-weight:bold;">
+                <th>S.No</th>
+                <th>doctorName</th>
+                <th>mobile</th>
+                <th>email</th>
+                <th>doctorQualification</th>
+                <th>experience</th>
+                <th>address</th>
+                <th>Delete</th>
+            </tr>
+
+
+            {% for i in data %}
+            <tr style="color: Green">
+                <td>{{forloop.counter}}</td>
+                <td>{{i.doctorName}}</td>
+                <td>{{i.mobile}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.doctorQualification}}</td>
+                <td>{{i.experience}} yr</td>
+                <td><textarea cols="30" rows="3">{{i.address}}</textarea></td>
+                <td><a class="btn-link" href="/DeleteDoctor/?uid={{ i.id }}" style="color:DARKBLUE">Delete</a></td>
+
+
+            </tr>
+            {% endfor %}
+
+
+        </table>
+    </section>
+
+  </div>
+</div>
+
+{%endblock%}
