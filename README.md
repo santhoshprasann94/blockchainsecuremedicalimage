@@ -108,21 +108,6 @@ project-root/
 
 ---
 
-## How to Run the Project
-
-### Step 1: Clone the Repository
-bash
-git clone https://github.com/santhoshprasann/blockchain-medical-storage.git
-Step 2: Navigate to Project Folder
-cd blockchain-medical-storage
-Step 3: Install Dependencies
-pip install -r requirements.txt
-Step 4: Run the Application
-python app.py
-
----
-
-
 ## References
 1.Langer, S.G. (2011) – Data storage in medical imaging
 2.Li, R. (2019) – Blockchain for IoT data storage
